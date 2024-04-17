@@ -5,6 +5,7 @@ class AppImage {
   static const String successLogo = 'assets/images/app_logo/success_logo.png';
   static const String facebookLogo = 'assets/images/app_logo/facebook_logo.png';
   static const String googleLogo = 'assets/images/app_logo/google_logo.png';
+  static const String profileLogo = 'assets/images/app_logo/profile_logo.png';
   static const String splash = 'assets/images/splash_image.png';
   static const String cardioClinic = 'assets/images/doctor_images/cardiology_clinic.png';
   static const String healthClinic = 'assets/images/doctor_images/health_clinic.png';

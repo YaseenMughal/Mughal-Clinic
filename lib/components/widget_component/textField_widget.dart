@@ -3,6 +3,7 @@ import 'package:mughal_clinic/components/constant_component/color_constant.dart'
 
 class AppTextField {
   static Padding textfield({
+    required BuildContext context,
     required String text,
     Icon? prefixIcon,
     Icon? suffixIcon,
@@ -15,8 +16,10 @@ class AppTextField {
     FormFieldSetter? onFieldSubmittedValue,
     int? minLines,
   }) {
+    double height = MediaQuery.of(context).size.height * 1;
+    double width = MediaQuery.of(context).size.width * 1;
     return Padding(
-      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+      padding: EdgeInsets.only(top: height * .01, bottom: height * .01),
       child: TextFormField(
         style: TextStyle(fontSize: 15.0, color: AppColor.subtitleColor, fontFamily: "Poppin", fontWeight: FontWeight.w400),
         minLines: minLines,

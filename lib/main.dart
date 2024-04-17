@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mughal_clinic/components/constant_component/color_constant.dart';
 import 'package:mughal_clinic/components/widget_component/onboard_widget.dart';
 import 'package:mughal_clinic/provider/splash_provider.dart';
+import 'package:mughal_clinic/provider/userInfo_provider.dart';
 import 'package:mughal_clinic/view/login_view.dart';
+import 'package:mughal_clinic/view/signup_view.dart';
 import 'package:mughal_clinic/view/splash_view.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => SplashProvider()),
+          ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ],
         child: MaterialApp(
           title: 'Mughal Clinic',
@@ -32,6 +35,7 @@ class MyApp extends StatelessWidget {
             SplashView.routeName: (BuildContext context) => const SplashView(),
             OnboardingView.routeName: (BuildContext context) => OnboardingView(),
             LoginView.routeName: (BuildContext context) => const LoginView(),
+            SignUpView.routeName: (BuildContext context) => const SignUpView(),
           },
         ));
   }

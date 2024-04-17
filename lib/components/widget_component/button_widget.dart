@@ -41,4 +41,19 @@ class AppButton {
       ),
     );
   }
+
+  static textButton({
+    required void Function()? onTap,
+    required String? text,
+  }) {
+    return TextButton(
+      onPressed: onTap,
+      child: Center(
+        child: Text(
+          text!,
+          style: TextStyle(fontSize: 14, fontFamily: "Poppin", fontWeight: FontWeight.w400, color: AppColor.txtBtnColor),
+        ),
+      ),
+    );
+  }
 }

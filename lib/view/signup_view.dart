@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mughal_clinic/components/constant_component/color_constant.dart';
 import 'package:mughal_clinic/components/constant_component/image_constant.dart';
 import 'package:mughal_clinic/components/constant_component/text_constant.dart';
@@ -8,31 +6,36 @@ import 'package:mughal_clinic/components/widget_component/app_widget.dart';
 import 'package:mughal_clinic/components/widget_component/button_widget.dart';
 import 'package:mughal_clinic/components/widget_component/textField_widget.dart';
 import 'package:mughal_clinic/util/utils.dart';
-import 'package:mughal_clinic/view/signup_view.dart';
+import 'package:mughal_clinic/view/login_view.dart';
 
-class LoginView extends StatefulWidget {
-  static const routeName = '/login';
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  static const routeName = '/signup';
+
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   Widget mainTextWidget = AppText.mainText();
 
+  final TextEditingController _tfcName = TextEditingController();
   final TextEditingController _tfcEmail = TextEditingController();
   final TextEditingController _tfcPassword = TextEditingController();
 
   // final _formKey = GlobalKey<FormState>();
+  final _nameFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
 
   @override
   void dispose() {
     super.dispose();
+    _tfcName.dispose();
     _tfcEmail.dispose();
     _tfcPassword.dispose();
+    _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
   }
@@ -55,7 +58,7 @@ class _LoginViewState extends State<LoginView> {
                   mainTextWidget,
                   SizedBox(height: height * .02),
                   Text(
-                    "Hi, Welcome Back!",
+                    "Create Account",
                     style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.w600,
@@ -65,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 2.0),
                   Text(
-                    "Hope you're doing fine.",
+                    "We are here to help you!",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -74,6 +77,17 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   SizedBox(height: height * .02),
+                  AppTextField.textfield(
+                    context: context,
+                    text: "Your Name",
+                    controller: _tfcName,
+                    keyboard: TextInputType.name,
+                    prefixIcon: const Icon(Icons.person_2_outlined),
+                    focusnode: _nameFocusNode,
+                    onFieldSubmittedValue: (newValue) {
+                      Utils.fieldFocus(context, _nameFocusNode, _emailFocusNode);
+                    },
+                  ),
                   AppTextField.textfield(
                     context: context,
                     text: "Your Email",
@@ -95,23 +109,51 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   AppButton.mainButton(
                     context,
-                    btnTxt: "Sign In",
+                    btnTxt: "Create Account",
                     btnTxtColor: AppColor.btnTxtColor,
                     btnColor: AppColor.titleColor,
                     height: 48.0,
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AppWidget.userInfo(
+                            children: [
+                              CircleAvatar(
+                                radius: 55,
+                                child: Image.asset(AppImage.profileLogo, fit: BoxFit.cover),
+                              ),
+                              AppTextField.textfield(
+                                context: context,
+                                text: "Your Name..",
+                                controller: _tfcName,
+                                keyboard: TextInputType.name,
+                                prefixIcon: const Icon(Icons.person_2_outlined),
+                                focusnode: _nameFocusNode,
+                              ),
+                              AppTextField.textfield(
+                                context: context,
+                                text: "name@example.com",
+                                controller: _tfcEmail,
+                                keyboard: TextInputType.emailAddress,
+                                prefixIcon: const Icon(Icons.mail_outline_rounded),
+                                focusnode: _emailFocusNode,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   AppWidget.doubleDivider(),
-                  AppWidget.authenticBox(context: context, image: AppImage.googleLogo, text: "Sign In with Google", onTap: () {}),
-                  AppWidget.authenticBox(context: context, image: AppImage.facebookLogo, text: "Sign In with Facebook", onTap: () {}),
-                  AppButton.textButton(onTap: () {}, text: "Forget password?"),
+                  AppWidget.authenticBox(context: context, image: AppImage.googleLogo, text: "Continue with Google", onTap: () {}),
+                  AppWidget.authenticBox(context: context, image: AppImage.facebookLogo, text: "Continue with Facebook", onTap: () {}),
                   AppText.richTxt(
-                    text01: "Don't have an account yet? ",
-                    text02: "Sign Up",
+                    text01: "Do you have an account? ",
+                    text02: "Sign In",
                     onTap: () {
-                      Navigator.of(context).pushReplacementNamed(SignUpView.routeName);
+                      Navigator.of(context).pushReplacementNamed(LoginView.routeName);
                     },
                   ),
                 ],

@@ -24,7 +24,7 @@ class AppText {
 
   static richTxt({String? text01, String? text02, void Function()? onTap}) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: InkWell(
         onTap: onTap,
         child: RichText(
